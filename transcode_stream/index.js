@@ -1,5 +1,5 @@
 const ASSEMBLYAI_API_KEY = "" // TODO: replace with your API key
-const RTMP_URL = "rtmp://0.tcp.ngrok.io:11107/live/ASSEMBLY" // TODO: replace with your RTSP URL
+const RTMP_URL = "rtmp://0.tcp.ngrok.io:11107/live/ASSEMBLY" // TODO: replace with your RTMP URL
 
 const WebSocket = require('ws');
 const VAD = require('node-vad'); // other libs include Praat or Essentia
