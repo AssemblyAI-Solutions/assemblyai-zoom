@@ -39,7 +39,7 @@ async def stream_to_websocket(rtmp_url, sample_rate):
     ffmpeg_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
     headers = {
-        "authorization": "7ca19699f6fe471da558028fc9414e06"  # Replace with your AssemblyAI API key
+        "authorization": ""  # Replace with your AssemblyAI API key
     }
 
     async with websockets.connect(websocket_url, extra_headers=headers) as ws:

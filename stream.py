@@ -22,7 +22,7 @@ vad_chunk_size = int(sample_rate * frame_duration / 1000) * 2
 
 async def run():
     extra_headers = {
-        'Authorization': '7ca19699f6fe471da558028fc9414e06'
+        'Authorization': ''
     }
 
     async with websockets.connect(f'wss://api.assemblyai.com/v2/realtime/ws?sample_rate={sample_rate}', extra_headers=extra_headers) as ws:

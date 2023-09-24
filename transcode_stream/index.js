@@ -1,4 +1,4 @@
-const ASSEMBLYAI_API_KEY = "7ca19699f6fe471da558028fc9414e06" // TODO: replace with your API key
+const ASSEMBLYAI_API_KEY = "" // TODO: replace with your API key
 const RTMP_URL = "rtmp://0.tcp.ngrok.io:11107/live/ASSEMBLY" // TODO: replace with your RTSP URL
 
 const WebSocket = require('ws');
