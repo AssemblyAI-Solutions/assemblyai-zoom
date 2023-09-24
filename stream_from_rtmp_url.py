@@ -26,13 +26,14 @@ async def stream_to_websocket(rtmp_url, sample_rate):
         "ffmpeg", 
         "-loglevel", "error",
         "-i", rtmp_url,
+        "-t", "10",
         "-f", "s16le",
-        "-acodec", "pcm_s16le",
+        # "-acodec", "pcm_s16le",
         "-ac", "1",
-        "-vn",
+        # "-vn",
         "-ar", sample_rate,
-        "-preset", "ultrafast",
-        "-"
+        # "-preset", "ultrafast",
+        # "-"
     ]
 
     ffmpeg_process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -49,6 +50,6 @@ async def stream_to_websocket(rtmp_url, sample_rate):
         )
 
 # Example usage:
-rtmp_stream = "rtmp://8.tcp.ngrok.io:15618/live/ASSEMBLY" # replace with your RTMP stream URL
+rtmp_stream = "rtmp://6.tcp.ngrok.io:15764/live/ASSEMBLY" # replace with your RTMP stream URL
 sample_rate = "16000"
 asyncio.run(stream_to_websocket(rtmp_stream, sample_rate))

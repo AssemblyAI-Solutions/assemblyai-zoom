@@ -25,5 +25,7 @@ In order to run the services required for this integration, you will need to bre
 2. Ngrok it: `ngrok tcp 1935`
 3. Start your Zoom meeting and set your stream details (click More > Live on Custom Live Streaming Service)
 4. Set your Streaming URL to the Ngrok server URL but replace `tcp://` with `rtmp://` and append `/live` to the end of the URL. For example, if your Ngrok URL is `tcp://0.tcp.ngrok.io:12345`, your Streaming URL should be `rtmp://0.tcp.ngrok.io:12345/live`. Then, set your Streaming key to ASSEMBLY and click Go Live
-5. Then in your terminal, run `source stream_rtmp.sh {YOUR_STREAMING_URL} ASSEMBLY`
-6. The Zoom stream should now be streaming through the input server and into AssemblyAI. The output will be logged in your terminal.
+5. <del>Then in your terminal, run `source stream_rtmp.sh {YOUR_STREAMING_URL} ASSEMBLY`</del>
+6. <del>The Zoom stream should now be streaming through the input server and into AssemblyAI. The output will be logged in your terminal.</del>
+7. cd into ./transcode_stream and update your Assembly API Key in index.js and npm install all the dependencies
+8. Run `node index.js` to start reading the stream. The RTMP stream will be transcoded in real-time with FFMPEG and sent to the AssemblyAI Real-Time Websocket for transcription.

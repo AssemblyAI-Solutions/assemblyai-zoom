@@ -9,6 +9,7 @@ import webrtcvad
 import wave
 import io
 import tempfile
+import ffmpeg
 
 class colors:
     FINAL = '\033[1m\033[92m'
@@ -32,25 +33,13 @@ async def run():
             try:  
                 for chunk in iter(lambda: sys.stdin.buffer.read(chunk_size), b''):
                     # OPTION 1: transcode chunk to pcm encoded 16 bit signed mono channel audio
-                    # ffmpeg_command = [
-                    #     'ffmpeg',
-                    #     '-i', '-',
-                    #     '-acodec', 'pcm_s16le',
-                    #     '-ac', '1',
-                    #     '-ar', '16000',
-                    #     '-f', 's16le',
-                    #     '-'
-                    # ]
-
-                    # ffmpeg_process = subprocess.Popen(
-                    #     ffmpeg_command, 
-                    #     stdin=subprocess.PIPE, 
-                    #     stdout=subprocess.PIPE, 
-                    #     stderr=subprocess.PIPE
-                    # )
-
-                    # data, stderr_data = ffmpeg_process.communicate(input=chunk)
-                    data = base64.b64encode(chunk).decode('utf-8')
+                    # input rtmp stream to pcm encoded 16 bit signed mono channel audio
+                    data, stderr = ffmpeg.input('pipe:0').output('pipe:1', format='s16le', acodec='pcm_s16le', ac=1, ar='16000').run_async(pipe_stdin=True, pipe_stdout=True, pipe_stderr=True, quiet=True, overwrite_output=True).communicate(input=chunk)
+                    # encode as base64             
+                    data = base64.b64encode(data).decode('utf-8')
+                    print(stderr)
+                    if (len(data) > 0):
+                        continue
 
                     # OPTION 2: convert to temp file and transcode
                     # with tempfile.NamedTemporaryFile(delete=False, suffix='.input') as tmp_input_file:
