@@ -1,4 +1,4 @@
-const ASSEMBLYAI_API_KEY = "7ca19699f6fe471da558028fc9414e06" // TODO: replace with your API key
+const ASSEMBLYAI_API_KEY = "" // TODO: replace with your API key
 const RTMP_URL = "rtmp://0.tcp.ngrok.io:11107/live/ASSEMBLY" // TODO: replace with your RTSP URL
 
 const WebSocket = require('ws');
@@ -60,7 +60,7 @@ ws.on('open', function open() {
 
     ffmpeg.stdout.on('data', (data) => {
         buffer = Buffer.concat([buffer, data]);
-        const buffer_size = 4096;
+        const buffer_size = 4096 * 2; // increasing buffer size may improve performance
         while (buffer.length >= buffer_size) {
             const chunk = buffer.slice(0, buffer_size);
             buffer = buffer.slice(buffer_size);
